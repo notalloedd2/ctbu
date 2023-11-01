@@ -1,0 +1,25 @@
+def fibonacci_matrix(n):
+    if n==0:
+        return 0
+    elif n==1:
+        return 1
+    else:
+        q = [[1,1],[1,0]]
+        res = power(q, n-1)
+        return res[0][0]
+
+def multiply(a, b):
+    mul = [[0,0],[0,0]]
+    for i in range(2):
+        for j in range(2):
+            mul[i][j] = a[i][0] * b[0][j] + a[i][1] * b[1][j]
+    return mul
+
+def power(a, n):
+    if n == 0:
+        return [[1,0],[0,1]]
+    elif n%2:
+        return multiply(a, power(a, n-1))
+    else:
+        half_n = power(a, n//2)
+        return multiply(half_n, half_n)
